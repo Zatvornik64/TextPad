@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 
-export default function AddText(props) {
+export default function AddButton(props) {
   return (
     <View style={styles.add}>
       {/*<Button
@@ -12,7 +12,7 @@ export default function AddText(props) {
       />*/}
       <TouchableOpacity
         style={styles.button}
-        onPress={()=> props.setAddModalOpen(true)}
+        onPress={()=> props.setEditorOpen(true)}
         >
         <Text style={styles.text}>ДОБАВИТЬ</Text>
       </TouchableOpacity>

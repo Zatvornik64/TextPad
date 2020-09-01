@@ -1,10 +1,23 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { Element } from './Element';
 
-export default function List() {
+
+export default function List({tasks}) {
+
+  tasks.forEach((item, i) => item.key = i.toString()) 
+//console.log(tasks)
   return (
     <View style={styles.list}>
-      <Text>Тут будет список записей</Text>
+      <FlatList
+        keyExtractor={item => item.key}
+        data={tasks}
+        renderItem={({ item }) => (
+          <Element task={item} /> 
+          //onRemove={removeTask} onOpen={openTask}
+           
+        )}
+      /> 
     </View>
   );
 }
