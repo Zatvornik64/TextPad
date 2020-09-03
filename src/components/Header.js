@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function Header() {
+export function Header() {
   return (
     <View style={styles.header}>
-      <Text>Заголовок</Text>
+      <Text style={styles.text}>ПРОСТОЙ СПИСОК ДЕЛ</Text>
     </View>
   );
 }
@@ -12,12 +12,14 @@ export default function Header() {
 const styles = StyleSheet.create({
   header: {
     flex: 1,
-    //height: '10%',
-    backgroundColor: '#fff',
+    backgroundColor: '#eee',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     borderStyle: 'solid',
     borderBottomWidth: 2,
-    borderBottomColor: 'red',
+    borderBottomColor: '#333',
   },
+  text: {
+    fontSize: 20,
+  }
 });

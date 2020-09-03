@@ -1,8 +1,8 @@
       import React, { useState } from 'react';
-      import { StyleSheet, TextInput, View, Button } from 'react-native';
+      import { StyleSheet, TextInput, View, Button, Alert } from 'react-native';
 
-      export default function Editor(props) {
-        const [value, setValue] = useState(props.value || '');
+      export function Editor(props) {
+        const [value, setValue] = useState(props.value || null);
         const valueHandler = (text) => setValue(text);
 
         return (
@@ -13,22 +13,38 @@
                 placeholder = "Введите текст"
                 placeholderTextColor = "#9a73ef"
                 //autoCapitalize = "none"
+                value={value}
                 onChangeText = {valueHandler}/>
               <View style={styles.buttons}>
                 <View style={styles.button}>
-                  <Button
-                    title="Сохранить"
+                <Button
+                    title="Назад"
                     onPress={() => {
-                      props.addTask(value);
                       props.setEditorOpen(false);
+                      props.setSelected(null);
                     }}
                   />
                 </View>
                 <View style={styles.button}>
                   <Button
-                    title="Назад"
+                    title="Сохранить"
                     onPress={() => {
-                      props.setEditorOpen(false);
+                      if (!value) {Alert.alert(
+                          "Ошибка",
+                          "Запись не должна быть пустой",
+                          [
+                            {
+                              text: "Хорошо",
+                              style: "cancel"
+                            },
+                          ],
+                          { cancelable: false }
+                        )}
+                      else {
+                        props.value ? props.editTask(value) : props.addTask(value);
+                        props.setEditorOpen(false);
+                        props.setSelected(null);
+                      }
                     }}
                   />
                   </View>

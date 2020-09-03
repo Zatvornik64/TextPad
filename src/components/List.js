@@ -1,23 +1,34 @@
-import React from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, FlatList, Modal, Button } from 'react-native';
 import { Element } from './Element';
+import { ListModal } from './ListModal';
 
-
-export default function List({tasks}) {
-
+export function List({tasks, selected, setSelected, setEditorOpen, deleteTask}) {
+  const [modalOpen, setModalOpen] = useState(false);
+  
   tasks.forEach((item, i) => item.key = i.toString()) 
-//console.log(tasks)
+
   return (
     <View style={styles.list}>
       <FlatList
-        keyExtractor={item => item.key}
+        keyExtractor={(item) => item.key}
         data={tasks}
         renderItem={({ item }) => (
-          <Element task={item} /> 
-          //onRemove={removeTask} onOpen={openTask}
-           
+          <Element
+            task={item}
+            setModalOpen={setModalOpen}
+            selected={selected}
+            setSelected={setSelected}
+          />
         )}
-      /> 
+      />
+      <ListModal
+        setSelected={setSelected}
+        setEditorOpen={setEditorOpen}
+        deleteTask={deleteTask}
+        setModalOpen={setModalOpen}
+        modalOpen={modalOpen}
+      />
     </View>
   );
 }
@@ -29,8 +40,33 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    borderStyle: 'solid',
-    borderBottomWidth: 2,
-    borderBottomColor: 'red',
+    //borderStyle: 'solid',
+    //borderBottomWidth: 2,
+    //borderBottomColor: 'red',
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5
+  },
+  button: {
+    width: 200,
+    marginVertical: 10,
   },
 });
