@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export function Header() {
   return (
     <View style={styles.header}>
-      <Text style={styles.text}>ПРОСТОЙ СПИСОК ДЕЛ</Text>
+      <Text style={styles.text}>ПРОСТОЙ БЛОКНОТ</Text>
     </View>
   );
 }
@@ -21,5 +21,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
+    paddingVertical: 10,
   }
 });

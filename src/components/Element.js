@@ -7,7 +7,10 @@ export const Element = ({ task, setModalOpen, selected, setSelected }) => {
     <TouchableOpacity
       style={styles.case}
       activeOpacity={0.5}
-      //onPress={() => onOpen(task.id)}
+      onPress={() => {
+        setSelected(task.id);
+        setModalOpen(true);
+      }}
       onLongPress={() => {
         setSelected(task.id);
         setModalOpen(true);

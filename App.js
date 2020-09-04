@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from "react";
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState, useEffect } from "react";
+import { StyleSheet, View, AsyncStorage } from 'react-native';
 import { Header } from "./src/components/Header";
 import { List } from "./src/components/List";
 import { EmptyList } from "./src/components/EmptyList";
@@ -11,26 +11,46 @@ export default function App() {
   const [editorOpen, setEditorOpen] = useState(false);
   const [selected, setSelected] = useState(null);
   const [tasks, setTasks] = useState([]);
+  
+  getValueFunction = () => {
+    AsyncStorage.getItem('TASKS').then(value =>
+      {
+        if (value) setTasks( JSON.parse(value) );
+      }
+    );
+  };
+  //console.log(tasks)
+  useEffect(() => {
+    getValueFunction();
+    }, []); 
 
-  const addTask = (text) => {
+  const addTask = (title, text) => {
     const newTask = [{
       id: new Date().toString(),
-      title: text,
+      title: title,
+      text: text,
     }]
-    setTasks([...tasks, ...newTask])
+    setTasks([...tasks, ...newTask]);
+    AsyncStorage.setItem('TASKS', JSON.stringify([...tasks, ...newTask]));
   };
-  const editTask = (text) => {
+  const editTask = (title, text) => {
     const newTask = [...tasks];
     newTask.forEach(item => {
-      if (item.id === selected) item.title = text
+      if (item.id === selected) {
+        item.title = title;
+        item.text = text;
+      }
     })
-    setTasks([...newTask])
+    setTasks([...newTask]);
+    AsyncStorage.setItem('TASKS', JSON.stringify([...newTask]));
   };
   const deleteTask = () => {
-    setTasks([...tasks.filter(item => item.id !== selected)])
+    setTasks([...tasks.filter(item => item.id !== selected)]);
+    AsyncStorage.setItem('TASKS', JSON.stringify([...tasks.filter(item => item.id !== selected)]));
   };
 
   const title = selected ? tasks.find(item => item.id === selected).title : null;
+  const text = selected ? tasks.find(item => item.id === selected).text : null;
 
   return (
     <View style={styles.container}>
@@ -58,7 +78,8 @@ export default function App() {
             setEditorOpen={setEditorOpen}
             addTask={addTask}
             editTask={editTask}
-            value={title}
+            title={title}
+            text={text}
             setSelected={setSelected}
           />
         </>
