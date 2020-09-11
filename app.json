@@ -2,6 +2,8 @@
   "expo": {
     "name": "Простой блокнот",
     "slug": "TextPad",
+    "privacy": "public",
+    "owner": "Mike Poshivalov",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/notepad-icon.png",
