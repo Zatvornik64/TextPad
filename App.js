@@ -6,9 +6,11 @@ import { List } from "./src/components/List";
 import { EmptyList } from "./src/components/EmptyList";
 import { AddButton } from "./src/components/AddButton";
 import { Editor } from "./src/components/Editor";
+import { About } from "./src/components/About";
 
 export default function App() {
   const [editorOpen, setEditorOpen] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
   const [selected, setSelected] = useState(null);
   const [tasks, setTasks] = useState([]);
   
@@ -54,9 +56,11 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      {!editorOpen && (
+      {(!editorOpen && !aboutOpen) && (
         <>
-          <Header />
+          <Header 
+            setAboutOpen={setAboutOpen} 
+          />
           {!tasks.length ? (
               <EmptyList />
             ) : (
@@ -71,9 +75,11 @@ export default function App() {
           <AddButton setEditorOpen={setEditorOpen} />
         </>
       )}
-      {editorOpen && (
+      {(editorOpen && !aboutOpen) && (
         <>
-          <Header />
+          <Header 
+            setAboutOpen={setAboutOpen}
+          />
           <Editor
             setEditorOpen={setEditorOpen}
             addTask={addTask}
@@ -81,6 +87,16 @@ export default function App() {
             title={title}
             text={text}
             setSelected={setSelected}
+          />
+        </>
+      )}
+      {aboutOpen && (
+        <>
+          <Header 
+            setAboutOpen={setAboutOpen}
+          />
+          <About
+            setAboutOpen={setAboutOpen}
           />
         </>
       )}
