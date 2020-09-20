@@ -14,17 +14,9 @@ export default function App() {
   const [selected, setSelected] = useState(null);
   const [tasks, setTasks] = useState([]);
   
-  getValueFunction = () => {
-    AsyncStorage.getItem('TASKS').then(value =>
-      {
-        if (value) setTasks( JSON.parse(value) );
-      }
-    );
-  };
-  //console.log(tasks)
-  useEffect(() => {
-    getValueFunction();
-    }, []); 
+  getValueFunction = () => { AsyncStorage.getItem('TASKS').then(value => { if (value) setTasks( JSON.parse(value) ) })};
+  
+  useEffect(() => { getValueFunction() }, []); 
 
   const addTask = (title, text) => {
     const newTask = [{
@@ -70,6 +62,8 @@ export default function App() {
                 setSelected={setSelected}
                 setEditorOpen={setEditorOpen}
                 deleteTask={deleteTask}
+                title={title}
+                text={text}
             />
             )}
           <AddButton setEditorOpen={setEditorOpen} />

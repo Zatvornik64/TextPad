@@ -3,9 +3,9 @@
     "name": "Простой блокнот",
     "slug": "TextPad",
     "privacy": "public",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "orientation": "portrait",
-    "icon": "./assets/notepad-icon.png",
+    "icon": "./assets/notepad.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",

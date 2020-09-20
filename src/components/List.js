@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, FlatList, Modal, Button } from 'react-native';
 import { Element } from './Element';
 import { ListModal } from './ListModal';
 
-export function List({tasks, selected, setSelected, setEditorOpen, deleteTask}) {
+export function List({tasks, selected, setSelected, setEditorOpen, deleteTask, title, text}) {
   const [modalOpen, setModalOpen] = useState(false);
   
   tasks.forEach((item, i) => item.key = i.toString()) 
@@ -28,6 +28,8 @@ export function List({tasks, selected, setSelected, setEditorOpen, deleteTask}) 
         deleteTask={deleteTask}
         setModalOpen={setModalOpen}
         modalOpen={modalOpen}
+        title={title}
+        text={text}
       />
     </View>
   );

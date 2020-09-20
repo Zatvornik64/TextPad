@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleSheet, View, Modal, Button } from 'react-native';
+import { StyleSheet, View, Modal, Button, Text } from 'react-native';
 
 
-export function ListModal({ setSelected, setEditorOpen, deleteTask, setModalOpen, modalOpen}) {
+export function ListModal({ setSelected, setEditorOpen, deleteTask, setModalOpen, modalOpen, title, text}) {
   
   return (
     <View style={styles.list}>
@@ -13,6 +13,10 @@ export function ListModal({ setSelected, setEditorOpen, deleteTask, setModalOpen
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
+            <View>
+              <Text style={styles.title}>{title}</Text>
+              <Text style={styles.text}>{text}</Text>
+            </View>
             <View style={styles.button}>
               <Button
                 title="Назад"
@@ -83,4 +87,10 @@ const styles = StyleSheet.create({
     width: 200,
     marginVertical: 10,
   },
+  title: {
+    fontSize: 20,
+  },
+  text: {
+    fontSize: 14,
+  }
 });
