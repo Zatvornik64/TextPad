@@ -22,7 +22,11 @@
     },
     "android": {
       "package": "com.github.Zatvornik64.TextPad",
-      "versionCode": 1
+      "versionCode": 1,
+      "adaptiveIcon": { 
+        "foregroundImage": "./assets/notepad.png",
+        "backgroundColor": "#87CEFA" 
+      }
     }
   }
 }
